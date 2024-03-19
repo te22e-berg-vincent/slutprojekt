@@ -8,6 +8,9 @@ using Raylib_cs;
 
 Raylib.InitWindow(800, 600, "hej");
 Raylib.SetTargetFPS(60);
+
+
+int playerSpeed = 4;
 int blockSize = 32;
 string scene;
 scene = "start";
@@ -87,10 +90,10 @@ levels.Add(grid3);
 //RECTS
 //---------------------------------------------------------------------------------
 
-Rectangle Player = new Rectangle (33,540,28,28);
 
 
-    
+
+
 
 //--------------------------------------------------------------------------------------------------------------------------
 //GAME LOGIC
@@ -117,30 +120,40 @@ while (!Raylib.WindowShouldClose())
         }
     }
 
-    if (scene == "lvl1"){
+    if (scene == "lvl1")
+    {
         levels[0] = grid1;
         lvlNum = 0;
     }
-   
-
-    
-
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-//Player
-//--------------------------------------------------------------------------------------------------------------------------
 
 
 
 
 
+
+    //--------------------------------------------------------------------------------------------------------------------------
+    //Player
+    //--------------------------------------------------------------------------------------------------------------------------
+Rectangle Player = new Rectangle(33, 548, 28, 28);
+
+       if (Raylib.IsKeyDown(KeyboardKey.Right))
+        {
+            Player.X += playerSpeed;
+        }
+        else if (Raylib.IsKeyDown(KeyboardKey.Left))
+        {
+            Player.X -= playerSpeed;
+        }
+        for (Raylib.CheckCollisionRecs(Player, block))
+        {
+            
+        }
 
 
 
 
     Raylib.DrawRectangleRec(Player, Color.White);
-   
+
 
 
     Raylib.BeginDrawing();
