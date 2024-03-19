@@ -20,3 +20,4 @@ C:\Users\vincent.berg2\Documents\Programerings projekt\slutprojekt\SlutProjekt\o
 C:\Users\vincent.berg2\Documents\Programerings projekt\slutprojekt\SlutProjekt\obj\Debug\net7.0\SlutProjekt.pdb
 C:\Users\vincent.berg2\Documents\Programerings projekt\slutprojekt\SlutProjekt\obj\Debug\net7.0\SlutProjekt.genruntimeconfig.cache
 C:\Users\vincent.berg2\Documents\Programerings projekt\slutprojekt\SlutProjekt\obj\Debug\net7.0\ref\SlutProjekt.dll
+C:\Users\vincent.berg2\Documents\Programerings projekt\slutprojekt\SlutProjekt\bin\Debug\net7.0\player.png
