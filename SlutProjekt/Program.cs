@@ -28,11 +28,11 @@ int[,] grid1 = {
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
@@ -89,8 +89,7 @@ levels.Add(grid3);
 //---------------------------------------------------------------------------------
 //RECTS
 //---------------------------------------------------------------------------------
-
-
+Rectangle Player = new Rectangle(33, 548, 28, 28);
 
 
 
@@ -98,13 +97,22 @@ levels.Add(grid3);
 //--------------------------------------------------------------------------------------------------------------------------
 //GAME LOGIC
 //--------------------------------------------------------------------------------------------------------------------------
+List<Rectangle> rects = new List<Rectangle>();
+
+
+
+
+
 
 int lvlNum = 0;
 while (!Raylib.WindowShouldClose())
 {
+    Raylib.DrawRectangleRec(Player, Color.White);
+
+
     if (scene == "start")
     {
-        Raylib.ClearBackground(Color.Black);
+        Raylib.ClearBackground(Color.Maroon);
     }
 
 
@@ -114,8 +122,13 @@ while (!Raylib.WindowShouldClose())
         {
             if (levels[lvlNum][y, x] == 1)
             {
+
                 Rectangle block = new Rectangle(x * blockSize, y * blockSize, 32, 32);
-                Raylib.DrawRectangleRec(block, Color.Red);
+                Raylib.DrawRectangleRec(block, Color.Black);
+                rects.Add (block);
+
+                
+
             }
         }
     }
@@ -127,32 +140,37 @@ while (!Raylib.WindowShouldClose())
     }
 
 
-
-
-
-
     //--------------------------------------------------------------------------------------------------------------------------
     //Player
     //--------------------------------------------------------------------------------------------------------------------------
-Rectangle Player = new Rectangle(33, 548, 28, 28);
 
-       if (Raylib.IsKeyDown(KeyboardKey.Right))
+
+    if (Raylib.IsKeyDown(KeyboardKey.Right))
+    {
+        Player.X += playerSpeed;
+    }
+    else if (Raylib.IsKeyDown(KeyboardKey.Left))
+    {
+        Player.X -= playerSpeed;
+    }
+    if (Raylib.IsKeyDown(KeyboardKey.Up))
+    {
+        Player.Y -= playerSpeed;
+    }
+    else if (Raylib.IsKeyDown(KeyboardKey.Down))
+    {
+        Player.Y += playerSpeed;
+    }
+
+   
+        if (Raylib.CheckCollisionRecs(Player, rects[1]))
         {
-            Player.X += playerSpeed;
-        }
-        else if (Raylib.IsKeyDown(KeyboardKey.Left))
-        {
-            Player.X -= playerSpeed;
-        }
-        for (Raylib.CheckCollisionRecs(Player, block))
-        {
-            
+                playerSpeed = 30;
+
         }
 
 
-
-
-    Raylib.DrawRectangleRec(Player, Color.White);
+       
 
 
 
@@ -162,18 +180,7 @@ Rectangle Player = new Rectangle(33, 548, 28, 28);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    Raylib.EndDrawing();
+Raylib.EndDrawing();
 
 }
 
