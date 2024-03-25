@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Xml.Schema;
 using Raylib_cs;
 
 
@@ -10,7 +11,8 @@ Raylib.InitWindow(800, 600, "hej");
 Raylib.SetTargetFPS(60);
 
 
-int playerSpeed = 4;
+int playerSpeedX = 4;
+int playerSpeedY = 4;
 int blockSize = 32;
 string scene;
 scene = "start";
@@ -34,9 +36,9 @@ int[,] grid1 = {
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,1,1},
     {1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,1,0,0,0,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1},
+    {1,0,0,0,1,0,0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1},
     {1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
@@ -89,7 +91,7 @@ levels.Add(grid3);
 //---------------------------------------------------------------------------------
 //RECTS
 //---------------------------------------------------------------------------------
-Rectangle Player = new Rectangle(33, 548, 28, 28);
+Rectangle Player = new Rectangle(33, 548, 24, 24);
 
 
 
@@ -125,9 +127,9 @@ while (!Raylib.WindowShouldClose())
 
                 Rectangle block = new Rectangle(x * blockSize, y * blockSize, 32, 32);
                 Raylib.DrawRectangleRec(block, Color.Black);
-                rects.Add (block);
+                rects.Add(block);
 
-                
+
 
             }
         }
@@ -147,31 +149,30 @@ while (!Raylib.WindowShouldClose())
 
     if (Raylib.IsKeyDown(KeyboardKey.Right))
     {
-        Player.X += playerSpeed;
+        Player.X += playerSpeedX;
     }
     else if (Raylib.IsKeyDown(KeyboardKey.Left))
     {
-        Player.X -= playerSpeed;
+        Player.X -= playerSpeedX;
     }
     if (Raylib.IsKeyDown(KeyboardKey.Up))
     {
-        Player.Y -= playerSpeed;
+        Player.Y -= playerSpeedY;
     }
     else if (Raylib.IsKeyDown(KeyboardKey.Down))
     {
-        Player.Y += playerSpeed;
+        Player.Y += playerSpeedY;
     }
-
-   
-        if (Raylib.CheckCollisionRecs(Player, rects[1]))
+    
+    foreach (Rectangle block in rects)
+    {
+        if (Raylib.CheckCollisionRecs(Player, block))
         {
-                playerSpeed = 30;
 
+         Player.X -= playerSpeedX;
+            Player.Y -= playerSpeedY;
         }
-
-
-       
-
+    }
 
 
     Raylib.BeginDrawing();
@@ -180,7 +181,7 @@ while (!Raylib.WindowShouldClose())
 
 
 
-Raylib.EndDrawing();
+    Raylib.EndDrawing();
 
 }
 
