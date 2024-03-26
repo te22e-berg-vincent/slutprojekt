@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Numerics;
 using System.Xml.Schema;
 using Raylib_cs;
 
@@ -7,12 +8,11 @@ using Raylib_cs;
 
 
 
-Raylib.InitWindow(800, 600, "hej");
+Raylib.InitWindow(800, 700, "hej");
 Raylib.SetTargetFPS(60);
 
 
-int playerSpeedX = 4;
-int playerSpeedY = 4;
+int playerSpeed = 3;
 int blockSize = 32;
 string scene;
 scene = "start";
@@ -30,15 +30,15 @@ int[,] grid1 = {
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,1,1},
-    {1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,1,0,0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1},
+    {1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1},
+    {1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,0,1},
+    {1,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+    {1,1,1,1,1,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,1,1},
+    {1,0,0,0,0,0,0,1,1,0,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1},
+    {1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,1},
     {1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
@@ -91,7 +91,7 @@ levels.Add(grid3);
 //---------------------------------------------------------------------------------
 //RECTS
 //---------------------------------------------------------------------------------
-Rectangle Player = new Rectangle(33, 548, 24, 24);
+Rectangle Player = new Rectangle(33, 548, 18, 18);
 
 
 
@@ -147,30 +147,21 @@ while (!Raylib.WindowShouldClose())
     //--------------------------------------------------------------------------------------------------------------------------
 
 
-    if (Raylib.IsKeyDown(KeyboardKey.Right))
-    {
-        Player.X += playerSpeedX;
-    }
-    else if (Raylib.IsKeyDown(KeyboardKey.Left))
-    {
-        Player.X -= playerSpeedX;
-    }
-    if (Raylib.IsKeyDown(KeyboardKey.Up))
-    {
-        Player.Y -= playerSpeedY;
-    }
-    else if (Raylib.IsKeyDown(KeyboardKey.Down))
-    {
-        Player.Y += playerSpeedY;
-    }
-    
+    if (Raylib.IsKeyDown(KeyboardKey.Right))Player.X += playerSpeed;
+    if (Raylib.IsKeyDown(KeyboardKey.Left))Player.X -= playerSpeed;
+    if (Raylib.IsKeyDown(KeyboardKey.Up)) Player.Y -= playerSpeed;
+    if (Raylib.IsKeyDown(KeyboardKey.Down))Player.Y += playerSpeed;
+ 
     foreach (Rectangle block in rects)
     {
         if (Raylib.CheckCollisionRecs(Player, block))
         {
-
-         Player.X -= playerSpeedX;
-            Player.Y -= playerSpeedY;
+          
+        if (Raylib.IsKeyDown(KeyboardKey.Right))Player.X -= playerSpeed;
+        if (Raylib.IsKeyDown(KeyboardKey.Left))Player.X += playerSpeed;
+        if (Raylib.IsKeyDown(KeyboardKey.Up)) Player.Y += playerSpeed;
+        if (Raylib.IsKeyDown(KeyboardKey.Down))Player.Y -= playerSpeed;
+           
         }
     }
 
