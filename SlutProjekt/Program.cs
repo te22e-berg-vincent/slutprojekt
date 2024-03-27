@@ -36,10 +36,10 @@ int[,] grid1 = {
     {1,0,1,1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,1,0,0,0,0,0,1},
     {1,0,1,0,0,0,0,1,0,0,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1},
     {1,0,1,0,1,1,0,1,0,1,1,0,1,1,0,0,0,0,0,0,1,0,0,0,1},
-    {1,0,1,0,1,0,0,1,0,2,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1},
+    {1,0,1,0,1,0,0,1,0,3,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1},
     {1,0,0,0,1,0,1,1,1,1,1,0,0,0,1,0,1,0,1,0,0,0,1,0,1},
     {1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,0,1},
-    {1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1},
+    {1,2,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1},
     {1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,1,1,1,0,1,0,1,1,1},
     {1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -54,7 +54,7 @@ int[,] grid2 = {
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -116,99 +116,99 @@ levels.Add(grid4);
 //RECTS
 //---------------------------------------------------------------------------------
 Rectangle Player = new Rectangle(78, 534, 14, 14);
-Rectangle hud = new Rectangle(0,605,800,100);
-
-
-
+Rectangle hud = new Rectangle(0, 605, 800, 100);
 //--------------------------------------------------------------------------------------------------------------------------
 //GAME LOGIC
 //--------------------------------------------------------------------------------------------------------------------------
-List<Rectangle> rects = new List<Rectangle>();
-
-
-
-
-
-
-int lvlNum = 0;
 while (!Raylib.WindowShouldClose())
 {
+List<Rectangle> rects = new List<Rectangle>();
+List<Rectangle> rects2 = new List<Rectangle>();
+int lvlNum = 0;
+for (int y = 0; y < levels[lvlNum].GetLength(0); y++)
+{
+    for (int x = 0; x < levels[lvlNum].GetLength(1); x++)
+    {
+        if (levels[lvlNum][y, x] == 1)
+        {
+
+            Rectangle block = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+            Raylib.DrawRectangleRec(block, Color.Gray);
+            rects.Add(block);
+        }
+        else if (levels[lvlNum][y, x] == 2)
+        {
+            Rectangle keyBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+            Raylib.DrawRectangleRec(keyBlock, Color.Gold);
+            rects2.Add(keyBlock);
+           
+        }
+        else if (levels[lvlNum][y, x] == 3)
+        {
+            Rectangle timeBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+            Raylib.DrawRectangleRec(timeBlock, Color.SkyBlue);
+            rects2.Add(timeBlock);
+        }
+        
+    }
+    
+}
+
     Raylib.DrawRectangleRec(Player, Color.Black);
-
-
     if (scene == "start")
     {
         Raylib.ClearBackground(Color.White);
     }
 
-
-    for (int y = 0; y < levels[lvlNum].GetLength(0); y++)
-    {
-        for (int x = 0; x < levels[lvlNum].GetLength(1); x++)
-        {
-            if (levels[lvlNum][y, x] == 1)
-            {
-                
-                Rectangle block = new Rectangle(x * blockSize, y * blockSize, 24, 24);
-                Raylib.DrawRectangleRec(block, Color.Gray);
-                rects.Add(block);
-
-
-
-            }
-            if(levels[lvlNum][y, x] == 2)
-            {
-                Rectangle keyBlock = new Rectangle(x* blockSize, y * blockSize, 24, 24);
-                Raylib.DrawRectangleRec(keyBlock,Color.Gold);
-                rects.Add(keyBlock);
-            }
-             if(levels[lvlNum][y, x] == 3)
-            {
-                Rectangle timeBlock = new Rectangle(x* blockSize, y * blockSize, 24, 24);
-                Raylib.DrawRectangleRec(timeBlock,Color.SkyBlue);
-                rects.Add(timeBlock);
-            }
-        }
-    }
-
     if (scene == "lvl1")
-    {   
+    {
         levels[0] = grid1;
         lvlNum = 0;
     }
-
-
     //--------------------------------------------------------------------------------------------------------------------------
     //Player
     //--------------------------------------------------------------------------------------------------------------------------
 
     //spelar kontroller
-    if (Raylib.IsKeyDown(KeyboardKey.D))Player.X += playerSpeed;
-    if (Raylib.IsKeyDown(KeyboardKey.A))Player.X -= playerSpeed;
+    if (Raylib.IsKeyDown(KeyboardKey.D)) Player.X += playerSpeed;
+    if (Raylib.IsKeyDown(KeyboardKey.A)) Player.X -= playerSpeed;
     if (Raylib.IsKeyDown(KeyboardKey.W)) Player.Y -= playerSpeed;
-    if (Raylib.IsKeyDown(KeyboardKey.S))Player.Y += playerSpeed;
- 
+    if (Raylib.IsKeyDown(KeyboardKey.S)) Player.Y += playerSpeed;
+
     foreach (Rectangle block in rects)
     {
         if (Raylib.CheckCollisionRecs(Player, block))
         {
-        //om spelaren går in i en vägg så vänds spelarens hastighet för att stoppa dem
-        if (Raylib.IsKeyDown(KeyboardKey.D))Player.X -= playerSpeed;
-        if (Raylib.IsKeyDown(KeyboardKey.A))Player.X += playerSpeed;
-        if (Raylib.IsKeyDown(KeyboardKey.W)) Player.Y += playerSpeed;
-        if (Raylib.IsKeyDown(KeyboardKey.S))Player.Y -= playerSpeed;
-           
+            //om spelaren går in i en vägg så vänds spelarens hastighet för att stoppa dem
+            if (Raylib.IsKeyDown(KeyboardKey.D)){Player.X -= playerSpeed;}
+            if (Raylib.IsKeyDown(KeyboardKey.A)){Player.X += playerSpeed;} 
+            if (Raylib.IsKeyDown(KeyboardKey.W)){Player.Y += playerSpeed;} 
+            if (Raylib.IsKeyDown(KeyboardKey.S)){Player.Y -= playerSpeed;} 
+
         }
     }
+    
+    foreach (Rectangle keyBlock in rects2)
+    {
+        if (Raylib.CheckCollisionRecs(Player,keyBlock))
+        {
+         levels[lvlNum][(int)(keyBlock.Y / blockSize), (int)(keyBlock.X / blockSize)] = 0; //delar y,x kordinater med storleken på blocken och sätter dem till 0 aka tar bort det.
+            
+        }
+    }
+    /*
+    foreach (Rectangle timeBlock in rects2)
+    {
+        if (Raylib.CheckCollisionRecs(Player,timeBlock))
+        {
 
-
+        }
+    }
+    */
+Raylib.DrawFPS(20,550);
     Raylib.BeginDrawing();
-
-    Raylib.DrawRectangleRec(hud,Color.Gray);
-
-
-
-
+    
+    Raylib.DrawRectangleRec(hud, Color.Gray);
     Raylib.EndDrawing();
 
 }
