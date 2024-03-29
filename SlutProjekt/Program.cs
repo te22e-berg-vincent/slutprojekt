@@ -108,7 +108,6 @@ int[,] grid4 = {
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
-
 levels.Add(grid1);
 levels.Add(grid2);
 levels.Add(grid3);
@@ -123,10 +122,6 @@ Rectangle hud = new Rectangle(0, 605, 800, 100);
 //--------------------------------------------------------------------------------------------------------------------------
 while (!Raylib.WindowShouldClose())
 {
-
-
-
-   
     List<Rectangle> rects = new List<Rectangle>();
     List<Rectangle> rects2 = new List<Rectangle>();
     List<Rectangle> Portal1 = new List<Rectangle>();
@@ -164,45 +159,41 @@ while (!Raylib.WindowShouldClose())
         }
 
     }
-foreach (Rectangle portalBlock in Portal1)
-{
- if (Raylib.CheckCollisionRecs(Player, portalBlock))
+    foreach (Rectangle portalBlock in Portal1)
     {
-        lvlNum++;
-        if (lvlNum >= levels.Count) // går till nästa level
+        if (Raylib.CheckCollisionRecs(Player, portalBlock))
         {
-            for (int y = 0; y < grid2.GetLength(0); y++)
+            lvlNum++;
+            if (lvlNum >= levels.Count) // går till nästa level
             {
-
-                for (int x = 0; x < grid2.GetLength(1); x++)
+                for (int y = 0; y < grid2.GetLength(0); y++)
                 {
-                    // Ladda rum 2
-                    if (grid1[y, x] != grid2[y, x]) //om grid1 y,x celler inte stämmer med grid2 så bile dom 0 aka tas bort
-                    {
-                        grid1[y, x] = 0;
-                    }
-                    if (grid2[y, x] == 1)
-                    {
-                        Rectangle block = new Rectangle(x * blockSize, y * blockSize, 26, 26);
-                        Raylib.DrawRectangleRec(block, Color.Gray);
 
-                    }
-                    if (grid2[y, x] == 2)
+                    for (int x = 0; x < grid2.GetLength(1); x++)
                     {
-                        Rectangle keyBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
-                        Raylib.DrawRectangleRec(keyBlock, Color.Gold);
+                        // Ladda rum 2
+                        if (grid1[y, x] != grid2[y, x]) //om grid1 y,x celler inte stämmer med grid2 så bile dom 0 aka tas bort
+                        {
+                            grid1[y, x] = 0;
+                        }
+                        if (grid2[y, x] == 1)
+                        {
+                            Rectangle block = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                            Raylib.DrawRectangleRec(block, Color.Gray);
+
+                        }
+                        if (grid2[y, x] == 2)
+                        {
+                            Rectangle keyBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                            Raylib.DrawRectangleRec(keyBlock, Color.Gold);
+                        }
                     }
-                 
                 }
-                
+                Player.Y += 34;
             }
-            Player.Y += 34;
+
         }
-       
     }
-}
-
-
     Raylib.DrawRectangleRec(Player, Color.Black);
     if (scene == "start")
     {
@@ -213,23 +204,12 @@ foreach (Rectangle portalBlock in Portal1)
             scene = "lvl1";
         }
     }
-
     if (scene == "lvl1")
     {
         levels[0] = grid1;
 
         Raylib.ClearBackground(Color.White);
     }
-
-    if (scene == "lvl2")
-    {
-        levels[1] = grid2;
-
-    }
-    //--------------------------------------------------------------------------------------------------------------------------
-    //Player
-    //--------------------------------------------------------------------------------------------------------------------------
-
     //spelar kontroller
     if (Raylib.IsKeyDown(KeyboardKey.D)) Player.X += playerSpeed;
     if (Raylib.IsKeyDown(KeyboardKey.A)) Player.X -= playerSpeed;
@@ -257,16 +237,6 @@ foreach (Rectangle portalBlock in Portal1)
 
         }
     }
-    /*
-    foreach (Rectangle timeBlock in rects2)
-    {
-        if (Raylib.CheckCollisionRecs(Player,timeBlock))
-        {
-
-        }
-    }
-    */
-
     Raylib.DrawFPS(20, 550);
     Raylib.BeginDrawing();
 
@@ -274,11 +244,3 @@ foreach (Rectangle portalBlock in Portal1)
     Raylib.EndDrawing();
 
 }
-
-
-
-/*
-Texture2D PlayerImg = Raylib.LoadTexture("player.png");
- Player.Width = PlayerImg.Width;
- Player.Height = PlayerImg.Height;
- */
