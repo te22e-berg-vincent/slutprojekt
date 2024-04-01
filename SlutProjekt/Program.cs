@@ -42,7 +42,7 @@ int[,] grid1 = {
     {1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,0,1},
     {1,2,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1},
     {1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,1,1,1,0,1,0,1,1,1},
-    {1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,6,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
 int[,] grid2 = {
@@ -68,23 +68,23 @@ int[,] grid2 = {
 };
 int[,] grid3 = {
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1},
+    {1,1,1,0,1,2,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,1,1,1},
+    {1,1,1,0,0,0,1,1,1,1,1,1,0,1,1,0,1,0,1,1,1,0,1,1,1},
+    {1,1,1,1,1,0,1,0,0,0,0,1,2,0,0,0,1,0,0,0,1,0,1,1,1},
+    {1,1,1,3,1,1,1,0,1,1,0,1,1,1,1,0,1,0,1,0,1,0,1,1,1},
+    {1,1,1,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0,1,0,0,0,1,1,1},
+    {1,0,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,1,1,1,0,1,1,1},
+    {1,0,1,1,0,0,0,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,3,1},
+    {1,2,1,1,0,1,1,1,0,1,3,1,0,0,0,0,1,1,1,1,1,0,1,0,1},
+    {1,1,1,1,0,0,0,0,0,1,0,0,0,1,1,0,1,2,0,0,0,0,1,0,1},
+    {1,0,3,1,1,1,2,1,0,1,1,1,0,0,1,0,1,1,0,1,1,1,1,0,1},
+    {1,0,0,1,3,1,1,1,0,1,2,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
+    {1,2,1,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1},
+    {1,0,1,1,0,1,0,1,0,3,1,0,0,0,1,0,0,0,1,1,0,1,3,0,1},
+    {1,0,0,0,0,1,0,1,1,1,1,0,1,0,1,0,1,0,1,1,0,1,1,1,1},
+    {1,1,1,1,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,7,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
 int[,] grid4 = {
@@ -123,9 +123,12 @@ Rectangle hud = new Rectangle(0, 605, 800, 100);
 while (!Raylib.WindowShouldClose())
 {
     List<Rectangle> rects = new List<Rectangle>();
-    List<Rectangle> rects2 = new List<Rectangle>();
+    List<Rectangle> rectsKey = new List<Rectangle>();
+    List<Rectangle> rectsTime = new List<Rectangle>();
     List<Rectangle> Portal1 = new List<Rectangle>();
     List<Rectangle> Portal2 = new List<Rectangle>();
+    List<Rectangle> Portal3 = new List<Rectangle>();
+    List<Rectangle> Portal4 = new List<Rectangle>();
 
 
 
@@ -145,14 +148,14 @@ while (!Raylib.WindowShouldClose())
             {
                 Rectangle keyBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(keyBlock, Color.Gold);
-                rects2.Add(keyBlock);
+                rectsKey.Add(keyBlock);
 
             }
             else if (levels[lvlNum][y, x] == 3)
             {
                 Rectangle timeBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(timeBlock, Color.SkyBlue);
-                rects2.Add(timeBlock);
+                rectsTime.Add(timeBlock);
             }
             else if (levels[lvlNum][y, x] == 4)
             {
@@ -165,6 +168,18 @@ while (!Raylib.WindowShouldClose())
                 Rectangle portalBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(portalBlock, Color.Maroon);
                 Portal2.Add(portalBlock);
+            }
+            if (levels[lvlNum][y, x] == 6)
+            {
+                Rectangle portalBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                Raylib.DrawRectangleRec(portalBlock, Color.Maroon);
+                Portal3.Add(portalBlock);
+            }
+            if (levels[lvlNum][y, x] == 7)
+            {
+                Rectangle portalBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                Raylib.DrawRectangleRec(portalBlock, Color.Maroon);
+                Portal4.Add(portalBlock);
             }
         }
     }
@@ -188,7 +203,22 @@ while (!Raylib.WindowShouldClose())
             Player.Y += 28;
         }
     }
-
+     foreach (Rectangle portalBlock in Portal3)
+    {//PORTAL I RUM 1 TILL RUM 3
+        if (Raylib.CheckCollisionRecs(Player, portalBlock))
+        {
+            lvlNum+=2; // gå tillbaka till grid1
+            Player.X -= 28;
+        }
+    }
+     foreach (Rectangle portalBlock in Portal4)
+    {//PORTAL I RUM 1 TILL RUM 3
+        if (Raylib.CheckCollisionRecs(Player, portalBlock))
+        {
+            lvlNum-=2; // gå tillbaka till grid1
+            Player.X -= 28;
+        }
+    }
     //-----------------------------------------------------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------------------------------------------------
@@ -209,12 +239,13 @@ while (!Raylib.WindowShouldClose())
     {
         Raylib.ClearBackground(Color.White);
     }
+    if (scene == "lvl1"){
     //spelar kontroller
     if (Raylib.IsKeyDown(KeyboardKey.D)) Player.X += playerSpeed;
     if (Raylib.IsKeyDown(KeyboardKey.A)) Player.X -= playerSpeed;
     if (Raylib.IsKeyDown(KeyboardKey.W)) Player.Y -= playerSpeed;
     if (Raylib.IsKeyDown(KeyboardKey.S)) Player.Y += playerSpeed;
-
+}
     foreach (Rectangle block in rects)
     {//om spelaren går in i en vägg så vänds spelarens hastighet för att stoppa dem
         if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(Player, block))
@@ -227,11 +258,19 @@ while (!Raylib.WindowShouldClose())
         {Player.Y -= playerSpeed;}
     }
 
-    foreach (Rectangle keyBlock in rects2)
+    foreach (Rectangle keyBlock in rectsKey)
     {
         if (Raylib.CheckCollisionRecs(Player, keyBlock))
         {
             levels[lvlNum][(int)(keyBlock.Y / blockSize), (int)(keyBlock.X / blockSize)] = 0; //delar y,x kordinater med storleken på blocken och sätter dem till 0 aka tar bort det.
+
+        }
+    }
+     foreach (Rectangle timeBlock in rectsTime)
+    {
+        if (Raylib.CheckCollisionRecs(Player, timeBlock))
+        {
+            levels[lvlNum][(int)(timeBlock.Y / blockSize), (int)(timeBlock.X / blockSize)] = 0; //delar y,x kordinater med storleken på blocken och sätter dem till 0 aka tar bort det.
 
         }
     }
