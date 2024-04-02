@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Numerics;
+using System.Security.Cryptography;
 using System.Xml.Schema;
 using Raylib_cs;
 
@@ -12,7 +13,7 @@ Raylib.InitWindow(800, 700, "hej");
 Raylib.SetTargetFPS(60);
 
 
-//int key = 0;
+int key = 0;
 int lvlNum = 0;
 int playerSpeed = 2;
 int blockSize = 32;
@@ -40,7 +41,7 @@ int[,] grid1 = {
     {1,0,1,0,1,0,0,1,0,3,1,0,1,1,1,1,1,0,1,0,0,0,1,0,1},
     {1,0,0,0,1,0,1,1,1,1,1,0,0,0,1,0,1,3,1,0,1,0,1,0,1},
     {1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,0,1},
-    {1,2,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1},
+    {1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1},
     {1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,1,1,1,0,1,0,1,1,1},
     {1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,6,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -63,14 +64,14 @@ int[,] grid2 = {
     {1,0,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,1,1,0,1,0,1},
     {1,0,1,1,1,1,1,0,1,0,1,1,0,0,0,0,0,1,0,0,0,0,1,0,1},
     {1,0,1,0,0,0,1,0,1,0,0,1,1,1,1,1,1,1,0,1,1,0,1,0,1},
-    {1,2,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,3,0,1,0,1},
+    {1,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,3,0,1,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
 int[,] grid3 = {
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1},
-    {1,1,1,0,1,2,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,1,1,1},
+    {1,1,1,0,1,10,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,1,1,1},
     {1,1,1,0,0,0,1,1,1,1,1,1,0,1,1,0,1,0,1,1,1,0,1,1,1},
     {1,1,1,1,1,0,1,0,0,0,0,1,2,0,0,0,1,0,0,0,1,0,1,1,1},
     {1,1,1,3,1,1,1,0,1,1,0,1,1,1,1,0,1,0,1,0,1,0,1,1,1},
@@ -83,7 +84,7 @@ int[,] grid3 = {
     {1,0,0,1,3,1,1,1,0,1,2,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
     {1,2,1,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1},
     {1,0,1,1,0,1,0,1,0,3,1,0,0,0,1,0,0,0,1,1,0,1,3,0,1},
-    {1,0,0,0,0,1,0,1,1,1,1,0,1,0,1,0,1,0,1,1,0,1,1,1,1},
+    {1,0,0,0,0,1,0,1,1,1,1,0,1,0,1,0,1,11,1,1,0,1,1,1,1},
     {1,1,1,1,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,7,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
@@ -125,6 +126,9 @@ while (!Raylib.WindowShouldClose())
     List<Rectangle> rects = new List<Rectangle>();
     List<Rectangle> rectsKey = new List<Rectangle>();
     List<Rectangle> rectsTime = new List<Rectangle>();
+    List<Rectangle> Switch = new List<Rectangle>();
+    List<Rectangle> gate = new List<Rectangle>();
+
     List<Rectangle> Portal1 = new List<Rectangle>();
     List<Rectangle> Portal2 = new List<Rectangle>();
     List<Rectangle> Portal3 = new List<Rectangle>();
@@ -133,7 +137,7 @@ while (!Raylib.WindowShouldClose())
     List<Rectangle> Portal6 = new List<Rectangle>();
 
 
-    
+
     for (int y = 0; y < levels[lvlNum].GetLength(0); y++)
     {
         for (int x = 0; x < levels[lvlNum].GetLength(1); x++)
@@ -194,6 +198,18 @@ while (!Raylib.WindowShouldClose())
                 Raylib.DrawRectangleRec(portalBlock, Color.Maroon);
                 Portal6.Add(portalBlock);
             }
+            if (levels[lvlNum][y, x] == 10)
+            {
+                Rectangle switchBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                Raylib.DrawRectangleRec(switchBlock, Color.DarkPurple);
+                Switch.Add(switchBlock);
+            }
+            if (levels[lvlNum][y, x] == 11)
+            {
+                Rectangle gateBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                Raylib.DrawRectangleRec(gateBlock, Color.DarkBlue);
+                gate.Add(gateBlock);
+            }
         }
     }
     //------------------------
@@ -216,27 +232,27 @@ while (!Raylib.WindowShouldClose())
             Player.Y += 28;
         }
     }
-     foreach (Rectangle portalBlock in Portal3)
+    foreach (Rectangle portalBlock in Portal3)
     {//PORTAL I RUM 1 TILL RUM 3
         if (Raylib.CheckCollisionRecs(Player, portalBlock))
         {
-            lvlNum+=2; // gå tillbaka till grid1
+            lvlNum += 2; // gå tillbaka till grid1
             Player.X -= 28;
         }
     }
-     foreach (Rectangle portalBlock in Portal4)
+    foreach (Rectangle portalBlock in Portal4)
     {//PORTAL I RUM 1 TILL RUM 3
         if (Raylib.CheckCollisionRecs(Player, portalBlock))
         {
-            lvlNum-=2; // gå tillbaka till grid1
+            lvlNum -= 2; // gå tillbaka till grid1
             Player.X -= 28;
         }
     }
-     foreach (Rectangle portalBlock in Portal5)
+    foreach (Rectangle portalBlock in Portal5)
     {//PORTAL I RUM 1 TILL RUM 3
         if (Raylib.CheckCollisionRecs(Player, portalBlock))
         {
-            lvlNum+=3; // gå tillbaka till grid1
+            lvlNum += 3; // gå tillbaka till grid1
             Player.X -= 34;
             Player.Y += 22;
         }
@@ -245,15 +261,16 @@ while (!Raylib.WindowShouldClose())
     {//PORTAL I RUM 1 TILL RUM 3
         if (Raylib.CheckCollisionRecs(Player, portalBlock))
         {
-            lvlNum-=3; // gå tillbaka till grid1
+            lvlNum -= 3; // gå tillbaka till grid1
             Player.X += 26;
             Player.Y -= 34;
         }
     }
+
     //-----------------------------------------------------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------------------------------------------------
-  
+
 
 
     Raylib.DrawRectangleRec(Player, Color.Black);
@@ -270,23 +287,24 @@ while (!Raylib.WindowShouldClose())
     {
         Raylib.ClearBackground(Color.White);
     }
-    if (scene == "lvl1"){
-    //spelar kontroller
-    if (Raylib.IsKeyDown(KeyboardKey.D)) Player.X += playerSpeed;
-    if (Raylib.IsKeyDown(KeyboardKey.A)) Player.X -= playerSpeed;
-    if (Raylib.IsKeyDown(KeyboardKey.W)) Player.Y -= playerSpeed;
-    if (Raylib.IsKeyDown(KeyboardKey.S)) Player.Y += playerSpeed;
-}
+    if (scene == "lvl1")
+    {
+        //spelar kontroller
+        if (Raylib.IsKeyDown(KeyboardKey.D)) Player.X += playerSpeed;
+        if (Raylib.IsKeyDown(KeyboardKey.A)) Player.X -= playerSpeed;
+        if (Raylib.IsKeyDown(KeyboardKey.W)) Player.Y -= playerSpeed;
+        if (Raylib.IsKeyDown(KeyboardKey.S)) Player.Y += playerSpeed;
+    }
     foreach (Rectangle block in rects)
     {//om spelaren går in i en vägg så vänds spelarens hastighet för att stoppa dem
         if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(Player, block))
-        {Player.X -= playerSpeed;}
+        { Player.X -= playerSpeed; }
         if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.CheckCollisionRecs(Player, block))
-        { Player.X += playerSpeed;}
+        { Player.X += playerSpeed; }
         if (Raylib.IsKeyDown(KeyboardKey.W) && Raylib.CheckCollisionRecs(Player, block))
-        {Player.Y += playerSpeed;}
+        { Player.Y += playerSpeed; }
         if (Raylib.IsKeyDown(KeyboardKey.S) && Raylib.CheckCollisionRecs(Player, block))
-        {Player.Y -= playerSpeed;}
+        { Player.Y -= playerSpeed; }
     }
 
     foreach (Rectangle keyBlock in rectsKey)
@@ -294,10 +312,10 @@ while (!Raylib.WindowShouldClose())
         if (Raylib.CheckCollisionRecs(Player, keyBlock))
         {
             levels[lvlNum][(int)(keyBlock.Y / blockSize), (int)(keyBlock.X / blockSize)] = 0; //delar y,x kordinater med storleken på blocken och sätter dem till 0 aka tar bort det.
-
+            key++;
         }
     }
-     foreach (Rectangle timeBlock in rectsTime)
+    foreach (Rectangle timeBlock in rectsTime)
     {
         if (Raylib.CheckCollisionRecs(Player, timeBlock))
         {
@@ -305,10 +323,48 @@ while (!Raylib.WindowShouldClose())
 
         }
     }
+    foreach (Rectangle switchBlock in Switch)
+    {
+        foreach (Rectangle gateBlock in gate)
+        {
+            if (Raylib.CheckCollisionRecs(Player, switchBlock))
+            {
+                levels[lvlNum][(int)(gateBlock.Y / blockSize), (int)(gateBlock.X / blockSize)] = 0;
+                levels[lvlNum][(int)(switchBlock.Y / blockSize), (int)(switchBlock.X / blockSize)] = 0;
+            }
+            if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(Player, gateBlock))
+            { Player.X -= playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.CheckCollisionRecs(Player, gateBlock))
+            { Player.X += playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.W) && Raylib.CheckCollisionRecs(Player, gateBlock))
+            { Player.Y += playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.S) && Raylib.CheckCollisionRecs(Player, gateBlock))
+            { Player.Y -= playerSpeed; }
+        }
+    }
+
+
+
+
+
+    if (key == 10)
+    {
+        playerSpeed = 5 / 2;
+    }
+    else if (key == 15)
+    {
+        playerSpeed = 3;
+    }
+    else if (key == 20)
+    {
+        playerSpeed = 4;
+    }
+
     Raylib.DrawFPS(20, 550);
     Raylib.BeginDrawing();
 
     Raylib.DrawRectangleRec(hud, Color.Gray);
+    Raylib.DrawText($"Keys {key}/20", 80, 650, 40, Color.Black);
     Raylib.EndDrawing();
 
 }
