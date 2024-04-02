@@ -71,15 +71,15 @@ int[,] grid3 = {
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1},
-    {1,1,1,0,1,10,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,1,1,1},
+    {1,1,1,0,1,10,1,0,0,0,0,0,0,2,1,0,0,0,0,0,0,3,1,1,1},
     {1,1,1,0,0,0,1,1,1,1,1,1,0,1,1,0,1,0,1,1,1,0,1,1,1},
-    {1,1,1,1,1,0,1,0,0,0,0,1,2,0,0,0,1,0,0,0,1,0,1,1,1},
+    {1,1,1,1,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,1},
     {1,1,1,3,1,1,1,0,1,1,0,1,1,1,1,0,1,0,1,0,1,0,1,1,1},
     {1,1,1,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0,1,0,0,0,1,1,1},
     {1,0,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,1,1,1,0,1,1,1},
     {1,0,1,1,0,0,0,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,3,1},
     {1,2,1,1,0,1,1,1,0,1,3,1,0,0,0,0,1,1,1,1,1,0,1,0,1},
-    {1,1,1,1,0,0,0,0,0,1,0,0,0,1,1,0,1,2,0,0,0,0,1,0,1},
+    {1,11,1,1,0,0,0,0,0,1,0,0,0,1,1,0,1,2,0,0,0,0,1,0,1},
     {1,0,3,1,1,1,2,1,0,1,1,1,0,0,1,0,1,1,0,1,1,1,1,0,1},
     {1,0,0,1,3,1,1,1,0,1,2,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
     {1,2,1,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1},
@@ -91,22 +91,22 @@ int[,] grid3 = {
 int[,] grid4 = {
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,3,1,1,2,1,1,1,1,1,1,1,1,2,0,1,0,0,0,1,0,3,1},
-    {1,1,1,0,1,1,0,1,1,2,1,1,1,1,1,1,0,1,0,1,0,1,0,1,1},
+    {1,1,1,0,1,1,0,1,1,2,1,1,1,1,1,1,0,1,0,1,13,1,0,1,1},
     {1,1,1,0,1,1,0,1,1,0,1,1,3,1,1,1,0,0,0,1,0,0,0,0,1},
-    {1,1,1,0,0,0,0,1,1,0,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1},
-    {1,1,1,0,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,9,1},
+    {1,1,1,0,0,0,0,1,0,0,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1},
+    {1,1,1,0,1,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,9,1},
     {1,1,1,0,0,0,0,1,0,0,0,1,0,1,0,1,1,0,1,1,0,1,1,1,1},
     {1,1,1,0,1,1,0,0,0,1,0,0,0,1,3,1,1,0,1,1,0,1,1,1,1},
     {1,1,1,0,0,1,1,1,1,1,1,1,0,1,1,1,1,2,1,1,0,1,3,0,1},
     {1,2,1,1,0,0,0,1,3,0,0,1,0,0,0,0,1,1,1,1,0,1,1,0,1},
-    {1,0,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,0,0,0,0,0,0,1},
+    {1,13,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,1,1,3,1,1,1,1,0,1},
     {1,0,1,1,1,1,1,1,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,1},
-    {1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,2,1,2,0,0,0,1},
-    {1,0,1,0,1,0,1,1,0,1,0,1,1,1,1,0,1,1,1,1,0,1,1,1,1},
-    {1,0,0,0,1,3,1,0,0,1,0,0,0,1,1,0,1,1,1,1,0,1,1,1,1},
+    {1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,2,1,0,0,0,0,1},
+    {1,0,1,0,1,0,1,1,0,1,0,1,1,1,1,0,1,1,1,1,2,1,1,1,1},
+    {1,0,0,0,1,3,1,0,0,1,0,0,0,1,1,0,1,1,1,1,13,1,1,1,1},
     {1,1,1,1,1,1,1,0,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,1},
-    {1,1,1,1,1,1,1,0,3,1,1,1,2,1,1,1,1,1,1,1,1,1,1,3,1},
+    {1,1,1,1,1,1,1,0,3,1,1,1,2,1,1,1,1,1,1,1,1,1,1,12,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
 levels.Add(grid1);
@@ -128,7 +128,8 @@ while (!Raylib.WindowShouldClose())
     List<Rectangle> rectsTime = new List<Rectangle>();
     List<Rectangle> Switch = new List<Rectangle>();
     List<Rectangle> gate = new List<Rectangle>();
-
+    List<Rectangle> Switch2 = new List<Rectangle>();
+    List<Rectangle> gate2 = new List<Rectangle>();
     List<Rectangle> Portal1 = new List<Rectangle>();
     List<Rectangle> Portal2 = new List<Rectangle>();
     List<Rectangle> Portal3 = new List<Rectangle>();
@@ -209,6 +210,18 @@ while (!Raylib.WindowShouldClose())
                 Rectangle gateBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(gateBlock, Color.DarkBlue);
                 gate.Add(gateBlock);
+            }
+              if (levels[lvlNum][y, x] == 12)
+            {
+                Rectangle switchBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                Raylib.DrawRectangleRec(switchBlock, Color.DarkPurple);
+                Switch2.Add(switchBlock);
+            }
+            if (levels[lvlNum][y, x] == 13)
+            {
+                Rectangle gateBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                Raylib.DrawRectangleRec(gateBlock, Color.DarkBlue);
+                gate2.Add(gateBlock);
             }
         }
     }
@@ -343,7 +356,25 @@ while (!Raylib.WindowShouldClose())
         }
     }
 
-
+   foreach (Rectangle switchBlock in Switch2)
+    {
+        foreach (Rectangle gateBlock in gate2)
+        {
+            if (Raylib.CheckCollisionRecs(Player, switchBlock))
+            {
+                levels[lvlNum][(int)(gateBlock.Y / blockSize), (int)(gateBlock.X / blockSize)] = 0;
+                levels[lvlNum][(int)(switchBlock.Y / blockSize), (int)(switchBlock.X / blockSize)] = 0;
+            }
+            if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(Player, gateBlock))
+            { Player.X -= playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.CheckCollisionRecs(Player, gateBlock))
+            { Player.X += playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.W) && Raylib.CheckCollisionRecs(Player, gateBlock))
+            { Player.Y += playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.S) && Raylib.CheckCollisionRecs(Player, gateBlock))
+            { Player.Y -= playerSpeed; }
+        }
+    }
 
 
 
