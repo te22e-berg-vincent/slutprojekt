@@ -12,7 +12,7 @@ using Raylib_cs;
 Raylib.InitWindow(800, 700, "hej");
 Raylib.SetTargetFPS(60);
 
-int key = 0;
+int key = 20;
 int lvlNum = 0;
 int playerSpeed = 2;
 int blockSize = 32;
@@ -367,7 +367,7 @@ while (!Raylib.WindowShouldClose())
     }
     if (lvlNum ==4)
     {
-        Raylib.DrawText("Victory", 250, 300, 75, Color.White);
+        Raylib.DrawText("Victory", 250, 340, 75, Color.White);
         Raylib.ClearBackground(Color.Black);
     }
     foreach (Rectangle block in rects)
