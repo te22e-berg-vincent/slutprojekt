@@ -12,7 +12,6 @@ using Raylib_cs;
 Raylib.InitWindow(800, 700, "hej");
 Raylib.SetTargetFPS(60);
 
-
 int key = 0;
 int lvlNum = 0;
 int playerSpeed = 2;
@@ -25,10 +24,13 @@ List<int[,]> levels = new();
 //Rendering
 //--------------------------------------------------------------------------------------------------------------------------
 
+
+
+
 int[,] grid1 = {
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    {1,0,0,0,0,0,0,0,0,0,0,1,4,1,3,0,0,0,0,0,0,0,0,0,1},
-    {1,0,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,0,1,1,1,1,1,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,1,14,1,3,0,0,0,0,0,0,0,0,0,1},
+    {1,0,1,1,1,1,1,1,0,1,0,1,15,1,1,1,1,0,1,1,1,1,1,0,1},
     {1,0,0,0,0,0,0,1,0,1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1},
     {1,0,1,1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,1,0,1,0,1,0,1},
     {1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,8,1},
@@ -38,12 +40,12 @@ int[,] grid1 = {
     {1,0,1,1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,1,0,0,0,0,0,1},
     {1,0,1,0,0,0,0,1,0,0,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1},
     {1,0,1,0,1,1,0,1,0,1,1,0,1,1,0,0,0,0,0,0,1,0,0,0,1},
-    {1,0,1,0,1,0,0,1,0,3,1,0,1,1,1,1,1,0,1,0,0,0,1,0,1},
-    {1,0,0,0,1,0,1,1,1,1,1,0,0,0,1,0,1,3,1,0,1,0,1,0,1},
-    {1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,0,1},
-    {1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,1},
-    {1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,1,1,1,0,1,0,1,1,1},
-    {1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,6,1},
+    {1,0,1,0,1,0,0,1,0,3,1,0,1,1,1,1,1,3,1,0,0,0,1,0,1},
+    {1,0,0,0,1,0,1,1,1,1,1,0,0,0,1,0,1,1,1,0,1,0,1,0,1},
+    {1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,0,1},
+    {1,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,0,0,0,0,1,0,0,0,1},
+    {1,0,0,0,1,0,0,1,0,1,0,1,0,0,0,1,1,1,1,0,1,0,1,1,1},
+    {1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,6,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
 int[,] grid2 = {
@@ -71,13 +73,13 @@ int[,] grid3 = {
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1},
-    {1,1,1,0,1,10,1,0,0,0,0,0,0,2,1,0,0,0,0,0,0,3,1,1,1},
-    {1,1,1,0,0,0,1,1,1,1,1,1,0,1,1,0,1,0,1,1,1,0,1,1,1},
-    {1,1,1,1,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,1},
+    {1,0,0,0,1,10,1,0,0,0,0,0,0,2,1,0,0,0,0,0,0,3,1,1,1},
+    {1,0,1,0,0,0,1,1,1,1,1,1,0,1,1,0,1,0,1,1,1,0,1,1,1},
+    {1,3,1,1,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,1},
     {1,1,1,3,1,1,1,0,1,1,0,1,1,1,1,0,1,0,1,0,1,0,1,1,1},
     {1,1,1,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0,1,0,0,0,1,1,1},
     {1,0,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,1,1,1,0,1,1,1},
-    {1,0,1,1,0,0,0,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,3,1},
+    {1,0,1,1,0,0,0,1,0,1,0,1,1,1,1,1,1,0,0,0,0,0,0,3,1},
     {1,2,1,1,0,1,1,1,0,1,3,1,0,0,0,0,1,1,1,1,1,0,1,0,1},
     {1,11,1,1,0,0,0,0,0,1,0,0,0,1,1,0,1,2,0,0,0,0,1,0,1},
     {1,0,3,1,1,1,2,1,0,1,1,1,0,0,1,0,1,1,0,1,1,1,1,0,1},
@@ -109,10 +111,35 @@ int[,] grid4 = {
     {1,1,1,1,1,1,1,0,3,1,1,1,2,1,1,1,1,1,1,1,1,1,1,12,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
+int[,] grid5 = {
+
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,0,0,1,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,1,0,0,1},
+    {1,1,1,1,1,0,1,0,1,0,0,1,1,1,0,0,1,0,1,0,1,1,1,1,1},
+    {1,1,1,1,1,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,1,1,1,1,1},
+    {1,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1},
+    {1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1},
+    {1,0,0,1,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,1,0,0,1},
+    {1,0,0,1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,0,1},
+    {1,1,1,1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,1},
+    {1,0,0,0,0,1,1,1,0,1,0,0,0,0,0,1,0,1,1,1,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+
+};
 levels.Add(grid1);
 levels.Add(grid2);
 levels.Add(grid3);
 levels.Add(grid4);
+levels.Add(grid5);
+
 //---------------------------------------------------------------------------------
 //RECTS
 //---------------------------------------------------------------------------------
@@ -121,8 +148,13 @@ Rectangle hud = new Rectangle(0, 605, 800, 100);
 //--------------------------------------------------------------------------------------------------------------------------
 //GAME LOGIC
 //--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 while (!Raylib.WindowShouldClose())
 {
+
     List<Rectangle> rects = new List<Rectangle>();
     List<Rectangle> rectsKey = new List<Rectangle>();
     List<Rectangle> rectsTime = new List<Rectangle>();
@@ -136,6 +168,9 @@ while (!Raylib.WindowShouldClose())
     List<Rectangle> Portal4 = new List<Rectangle>();
     List<Rectangle> Portal5 = new List<Rectangle>();
     List<Rectangle> Portal6 = new List<Rectangle>();
+    List<Rectangle> victoryPortal = new List<Rectangle>();
+    List<Rectangle> VictoryGate = new List<Rectangle>();
+
 
 
 
@@ -202,7 +237,7 @@ while (!Raylib.WindowShouldClose())
             if (levels[lvlNum][y, x] == 10)
             {
                 Rectangle switchBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
-                Raylib.DrawRectangleRec(switchBlock, Color.DarkPurple);
+                Raylib.DrawRectangleRec(switchBlock, Color.Purple);
                 Switch.Add(switchBlock);
             }
             if (levels[lvlNum][y, x] == 11)
@@ -211,7 +246,7 @@ while (!Raylib.WindowShouldClose())
                 Raylib.DrawRectangleRec(gateBlock, Color.DarkBlue);
                 gate.Add(gateBlock);
             }
-              if (levels[lvlNum][y, x] == 12)
+            if (levels[lvlNum][y, x] == 12)
             {
                 Rectangle switchBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(switchBlock, Color.DarkPurple);
@@ -222,6 +257,18 @@ while (!Raylib.WindowShouldClose())
                 Rectangle gateBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(gateBlock, Color.DarkBlue);
                 gate2.Add(gateBlock);
+            }
+            if (levels[lvlNum][y, x] == 14)
+            {
+                Rectangle victoryTP = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                Raylib.DrawRectangleRec(victoryTP, Color.Green);
+                victoryPortal.Add(victoryTP);
+            }
+            if (levels[lvlNum][y, x] == 15)
+            {
+                Rectangle victoryGate = new Rectangle(x * blockSize, y * blockSize, 26, 26);
+                Raylib.DrawRectangleRec(victoryGate, Color.Gray);
+                VictoryGate.Add(victoryGate);
             }
         }
     }
@@ -279,6 +326,15 @@ while (!Raylib.WindowShouldClose())
             Player.Y -= 34;
         }
     }
+    foreach (Rectangle victoryTP in victoryPortal)
+    {//PORTAL I RUM 1 TILL RUM 3
+        if (Raylib.CheckCollisionRecs(Player, victoryTP))
+        {
+            lvlNum += 4;
+            Player.Y = 550;
+        }
+
+    }
 
     //-----------------------------------------------------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------------------------------------------------
@@ -286,7 +342,7 @@ while (!Raylib.WindowShouldClose())
 
 
 
-    Raylib.DrawRectangleRec(Player, Color.Black);
+    Raylib.DrawRectangleRec(Player, Color.DarkPurple);
     if (scene == "start")
     {
         Raylib.ClearBackground(Color.White);
@@ -300,6 +356,7 @@ while (!Raylib.WindowShouldClose())
     {
         Raylib.ClearBackground(Color.White);
     }
+    
     if (scene == "lvl1")
     {
         //spelar kontroller
@@ -307,6 +364,11 @@ while (!Raylib.WindowShouldClose())
         if (Raylib.IsKeyDown(KeyboardKey.A)) Player.X -= playerSpeed;
         if (Raylib.IsKeyDown(KeyboardKey.W)) Player.Y -= playerSpeed;
         if (Raylib.IsKeyDown(KeyboardKey.S)) Player.Y += playerSpeed;
+    }
+    if (lvlNum ==4)
+    {
+        Raylib.DrawText("Victory", 250, 300, 75, Color.White);
+        Raylib.ClearBackground(Color.Black);
     }
     foreach (Rectangle block in rects)
     {//om spelaren går in i en vägg så vänds spelarens hastighet för att stoppa dem
@@ -356,7 +418,7 @@ while (!Raylib.WindowShouldClose())
         }
     }
 
-   foreach (Rectangle switchBlock in Switch2)
+    foreach (Rectangle switchBlock in Switch2)
     {
         foreach (Rectangle gateBlock in gate2)
         {
@@ -376,7 +438,13 @@ while (!Raylib.WindowShouldClose())
         }
     }
 
-
+    foreach (Rectangle victoryGate in VictoryGate)
+    {
+        if (key == 20)
+        {
+            levels[lvlNum][(int)(victoryGate.Y / blockSize), (int)(victoryGate.X / blockSize)] = 0;
+        }
+    }
 
     if (key == 10)
     {
@@ -388,7 +456,7 @@ while (!Raylib.WindowShouldClose())
     }
     else if (key == 20)
     {
-        playerSpeed = 4;
+        playerSpeed = 7 / 2;
     }
 
     Raylib.DrawFPS(20, 550);
