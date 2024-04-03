@@ -12,7 +12,7 @@ using Raylib_cs;
 Raylib.InitWindow(800, 700, "hej");
 Raylib.SetTargetFPS(60);
 
-int key = 20;
+int key = 0;
 int lvlNum = 0;
 int playerSpeed = 2;
 int blockSize = 32;
