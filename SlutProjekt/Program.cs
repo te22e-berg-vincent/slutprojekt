@@ -11,6 +11,7 @@ using Raylib_cs;
 
 Raylib.InitWindow(800, 700, "hej");
 Raylib.SetTargetFPS(60);
+float countDownSpeed = 1 / 54f;
 
 int key = 0;
 int lvlNum = 0;
@@ -145,6 +146,8 @@ levels.Add(grid5);
 //---------------------------------------------------------------------------------
 Rectangle Player = new Rectangle(78, 534, 14, 14);
 Rectangle hud = new Rectangle(0, 605, 800, 100);
+Rectangle timer = new Rectangle(375, 645, 240, 25);
+Rectangle timerCountDown = new Rectangle(575, 645, 240, 25);
 //--------------------------------------------------------------------------------------------------------------------------
 //GAME LOGIC
 //--------------------------------------------------------------------------------------------------------------------------
@@ -195,7 +198,7 @@ while (!Raylib.WindowShouldClose())
             else if (levels[lvlNum][y, x] == 3)
             {
                 Rectangle timeBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
-                Raylib.DrawRectangleRec(timeBlock, Color.SkyBlue);
+                Raylib.DrawRectangleRec(timeBlock, Color.Blue);
                 rectsTime.Add(timeBlock);
             }
             else if (levels[lvlNum][y, x] == 4)
@@ -272,9 +275,9 @@ while (!Raylib.WindowShouldClose())
             }
         }
     }
-    //------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     //BYTE MELLAN RUM
-    //------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     foreach (Rectangle portalBlock in Portal1)
     {
         if (Raylib.CheckCollisionRecs(Player, portalBlock))
@@ -355,8 +358,9 @@ while (!Raylib.WindowShouldClose())
     if (scene == "lvl1")
     {
         Raylib.ClearBackground(Color.White);
+        timerCountDown.X -= countDownSpeed;
     }
-    
+
     if (scene == "lvl1")
     {
         //spelar kontroller
@@ -365,11 +369,7 @@ while (!Raylib.WindowShouldClose())
         if (Raylib.IsKeyDown(KeyboardKey.W)) Player.Y -= playerSpeed;
         if (Raylib.IsKeyDown(KeyboardKey.S)) Player.Y += playerSpeed;
     }
-    if (lvlNum ==4)
-    {
-        Raylib.DrawText("Victory", 250, 340, 75, Color.White);
-        Raylib.ClearBackground(Color.Black);
-    }
+
     foreach (Rectangle block in rects)
     {//om spelaren går in i en vägg så vänds spelarens hastighet för att stoppa dem
         if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(Player, block))
@@ -382,6 +382,7 @@ while (!Raylib.WindowShouldClose())
         { Player.Y -= playerSpeed; }
     }
 
+
     foreach (Rectangle keyBlock in rectsKey)
     {
         if (Raylib.CheckCollisionRecs(Player, keyBlock))
@@ -390,14 +391,40 @@ while (!Raylib.WindowShouldClose())
             key++;
         }
     }
-    foreach (Rectangle timeBlock in rectsTime)
+
+
+    foreach (Rectangle timeBlock in rectsTime) // När man nuddar timeBlock så försvinner blocket och man får +5 sekunder på timern.
     {
         if (Raylib.CheckCollisionRecs(Player, timeBlock))
         {
             levels[lvlNum][(int)(timeBlock.Y / blockSize), (int)(timeBlock.X / blockSize)] = 0; //delar y,x kordinater med storleken på blocken och sätter dem till 0 aka tar bort det.
-
+            timerCountDown.X += 5.655f;
         }
     }
+
+
+    foreach (Rectangle victoryGate in VictoryGate) // Kondition för att låsa upp sista rummet
+    {
+        if (key == 20)
+        {
+            levels[lvlNum][(int)(victoryGate.Y / blockSize), (int)(victoryGate.X / blockSize)] = 0;
+        }
+    }
+
+    if (key == 10)
+    {
+        playerSpeed = 5 / 2;
+    }
+    else if (key == 15)
+    {
+        playerSpeed = 3;
+    }
+    else if (key == 20)
+    {
+        playerSpeed = 7 / 2;
+    }
+
+
     foreach (Rectangle switchBlock in Switch)
     {
         foreach (Rectangle gateBlock in gate)
@@ -438,32 +465,36 @@ while (!Raylib.WindowShouldClose())
         }
     }
 
-    foreach (Rectangle victoryGate in VictoryGate)
-    {
-        if (key == 20)
-        {
-            levels[lvlNum][(int)(victoryGate.Y / blockSize), (int)(victoryGate.X / blockSize)] = 0;
-        }
-    }
 
-    if (key == 10)
-    {
-        playerSpeed = 5 / 2;
-    }
-    else if (key == 15)
-    {
-        playerSpeed = 3;
-    }
-    else if (key == 20)
-    {
-        playerSpeed = 7 / 2;
-    }
 
-    Raylib.DrawFPS(20, 550);
+    Raylib.DrawFPS(35, 550);
+
     Raylib.BeginDrawing();
 
+
+
     Raylib.DrawRectangleRec(hud, Color.Gray);
-    Raylib.DrawText($"Keys {key}/20", 80, 650, 40, Color.Black);
+    Raylib.DrawRectangleRec(timer, Color.Blue);
+    Raylib.DrawRectangleRec(timerCountDown, Color.Gray);
+    Raylib.DrawText($"Keys {key}/20", 80, 640, 40, Color.Black);
+    if (timerCountDown.X < 375)
+    {
+        scene = "gameOver";
+        Raylib.DrawRectangle(0, 0, 800, 700, Color.Black);
+        countDownSpeed = 0;
+        Raylib.DrawText("GAME OVER", 165, 340, 75, Color.Red);
+    }
+    if (lvlNum == 4)
+    {
+        Raylib.DrawText("Victory", 250, 330, 75, Color.Green);
+        Raylib.ClearBackground(Color.Black);
+        countDownSpeed = 0;
+        Raylib.DrawRectangle(375, 645, 240, 25, Color.Gray);
+    }
+
+
+
+
     Raylib.EndDrawing();
 
 }
