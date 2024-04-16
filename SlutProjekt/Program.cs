@@ -362,8 +362,18 @@ while (!Raylib.WindowShouldClose())
     {
         Raylib.ClearBackground(Color.White);
         Raylib.DrawRectangle(0, 0, 800, 700, Color.Gray);
-        Raylib.DrawRectangle(50, 300, 50, 50, Color.Gold);
+        Raylib.DrawRectangle(100, 300, 50, 50, Color.Gold);
+        Raylib.DrawRectangle(220, 300, 50, 50, Color.SkyBlue);
+        Raylib.DrawRectangle(375, 300, 50, 50, Color.Maroon);
+        Raylib.DrawRectangle(530, 300, 50, 50, Color.DarkPurple);
+        Raylib.DrawRectangle(650, 300, 50, 50, Color.Purple);
 
+        Raylib.DrawText("Key", 103, 355, 25, Color.Black);
+        Raylib.DrawText("+5 sek", 205, 355, 25, Color.Black);
+        Raylib.DrawText("Door", 370, 355, 25, Color.Black);
+        Raylib.DrawText("Gate", 528, 355, 25, Color.Black);
+        Raylib.DrawText("Switch", 640, 355, 25, Color.Black);
+         Raylib.DrawText("PRESS SPACE TO START", 200, 500, 30, Color.Black);
 
 
 
@@ -407,12 +417,12 @@ while (!Raylib.WindowShouldClose())
     {
         if (Raylib.CheckCollisionRecs(Player, keyBlock))
         {//ta bort blocket och lägg till en key
-        
+
             levels[lvlNum][(int)(keyBlock.Y / blockSize), (int)(keyBlock.X / blockSize)] = 0; //delar y,x kordinater med storleken på blocken och sätter dem till 0 aka tar bort det.
             key++;
         }
-    
-    
+
+
     }
 
     foreach (Rectangle timeBlock in rectsTime)
@@ -421,15 +431,13 @@ while (!Raylib.WindowShouldClose())
         {
             levels[lvlNum][(int)(timeBlock.Y / blockSize), (int)(timeBlock.X / blockSize)] = 0; // När man nuddar timeBlock så försvinner blocket och man får +5 sekunder på timern.
             timerCountDown.X += 5.655f; // lägg till 5 sek
-
-
         }
     }
 
 
-   
 
-   
+
+
     //hastighetsförändring beroende på antalet keys som spelaren har plockat upp
     if (key == 10)
     {
