@@ -7,8 +7,22 @@ using Raylib_cs;
 
 
 
-
-
+static void startScreen()
+{
+        Raylib.ClearBackground(Color.White);
+        Raylib.DrawRectangle(0, 0, 800, 700, Color.Gray);
+        Raylib.DrawRectangle(100, 300, 50, 50, Color.Gold);
+        Raylib.DrawRectangle(220, 300, 50, 50, Color.SkyBlue);
+        Raylib.DrawRectangle(375, 300, 50, 50, Color.Maroon);
+        Raylib.DrawRectangle(530, 300, 50, 50, Color.DarkPurple);
+        Raylib.DrawRectangle(650, 300, 50, 50, Color.Purple);
+        Raylib.DrawText("Key", 103, 355, 25, Color.Black);
+        Raylib.DrawText("+5 sek", 205, 355, 25, Color.Black);
+        Raylib.DrawText("Door", 370, 355, 25, Color.Black);
+        Raylib.DrawText("Gate", 528, 355, 25, Color.Black);
+        Raylib.DrawText("Switch", 640, 355, 25, Color.Black);
+         Raylib.DrawText("PRESS SPACE TO START", 200, 500, 30, Color.Black);
+}
 
 Raylib.InitWindow(800, 700, "hej");
 Raylib.SetTargetFPS(60);
@@ -360,22 +374,7 @@ while (!Raylib.WindowShouldClose())
     Raylib.DrawRectangleRec(Player, Color.DarkPurple);
     if (scene == "start")
     {
-        Raylib.ClearBackground(Color.White);
-        Raylib.DrawRectangle(0, 0, 800, 700, Color.Gray);
-        Raylib.DrawRectangle(100, 300, 50, 50, Color.Gold);
-        Raylib.DrawRectangle(220, 300, 50, 50, Color.SkyBlue);
-        Raylib.DrawRectangle(375, 300, 50, 50, Color.Maroon);
-        Raylib.DrawRectangle(530, 300, 50, 50, Color.DarkPurple);
-        Raylib.DrawRectangle(650, 300, 50, 50, Color.Purple);
-
-        Raylib.DrawText("Key", 103, 355, 25, Color.Black);
-        Raylib.DrawText("+5 sek", 205, 355, 25, Color.Black);
-        Raylib.DrawText("Door", 370, 355, 25, Color.Black);
-        Raylib.DrawText("Gate", 528, 355, 25, Color.Black);
-        Raylib.DrawText("Switch", 640, 355, 25, Color.Black);
-         Raylib.DrawText("PRESS SPACE TO START", 200, 500, 30, Color.Black);
-
-
+      startScreen();
 
         if (Raylib.IsKeyDown(KeyboardKey.Space))
         {
