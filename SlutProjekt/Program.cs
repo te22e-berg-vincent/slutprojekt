@@ -4,38 +4,30 @@ using System.Security.Cryptography;
 using System.Timers;
 using System.Xml.Schema;
 using Raylib_cs;
+using SlutProjekt;
 
 
 
-static void startScreen()
-{
-        Raylib.ClearBackground(Color.White);
-        Raylib.DrawRectangle(0, 0, 800, 700, Color.Gray);
-        Raylib.DrawRectangle(100, 300, 50, 50, Color.Gold);
-        Raylib.DrawRectangle(220, 300, 50, 50, Color.SkyBlue);
-        Raylib.DrawRectangle(375, 300, 50, 50, Color.Maroon);
-        Raylib.DrawRectangle(530, 300, 50, 50, Color.DarkPurple);
-        Raylib.DrawRectangle(650, 300, 50, 50, Color.Purple);
-        Raylib.DrawText("Key", 103, 355, 25, Color.Black);
-        Raylib.DrawText("+5 sek", 205, 355, 25, Color.Black);
-        Raylib.DrawText("Door", 370, 355, 25, Color.Black);
-        Raylib.DrawText("Gate", 528, 355, 25, Color.Black);
-        Raylib.DrawText("Switch", 640, 355, 25, Color.Black);
-         Raylib.DrawText("PRESS SPACE TO START", 200, 500, 30, Color.Black);
-}
+
+
+
+  
+  
+
+
 
 Raylib.InitWindow(800, 700, "hej");
 Raylib.SetTargetFPS(60);
+
+
 float countDownSpeed = 1 / 54f;
-
-
 int key = 0;
 int lvlNum = 0;
 int playerSpeed = 2;
 int blockSize = 32;
 string scene;
 scene = "start";
-//lista för dem olika gridsen som använd för rummen
+//lista för dem olika gridsen som använd för Rummen
 List<int[,]> levels = new();
 //--------------------------------------------------------------------------------------------------------------------------
 //Rendering
@@ -161,10 +153,12 @@ levels.Add(grid5);
 //---------------------------------------------------------------------------------
 //RECTS
 //---------------------------------------------------------------------------------
-Rectangle Player = new Rectangle(78, 534, 14, 14);
+
+Rectangle player = new Rectangle(78, 534, 14, 14);
 Rectangle hud = new Rectangle(0, 605, 800, 100);
 Rectangle timer = new Rectangle(375, 645, 240, 25);
 Rectangle timerCountDown = new Rectangle(575, 645, 240, 25);
+
 //---------------------------------------------------------------------------------
 
 
@@ -203,6 +197,8 @@ while (!Raylib.WindowShouldClose())
     {
         for (int x = 0; x < levels[lvlNum].GetLength(1); x++)
         {
+
+            
             if (levels[lvlNum][y, x] == 1) // alla gråa väggar
             {
 
@@ -223,61 +219,61 @@ while (!Raylib.WindowShouldClose())
                 Raylib.DrawRectangleRec(timeBlock, Color.Green);
                 rectsTime.Add(timeBlock);
             }
-            else if (levels[lvlNum][y, x] == 4) //portal/dörr till rum 2
+            else if (levels[lvlNum][y, x] == 4) //portal/dörr till Rum 2
             {
                 portalBlock1 = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(portalBlock1, Color.Maroon);
                 //Portal1.Add(portalBlock);
             }
-            if (levels[lvlNum][y, x] == 5) // portal/dörr från rum 2 till 1
+            if (levels[lvlNum][y, x] == 5) // portal/dörr från Rum 2 till 1
             {
                 portalBlock2 = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(portalBlock2, Color.Maroon);
                 //Portal2.Add(portalBlock);
             }
-            if (levels[lvlNum][y, x] == 6) //portal/dörr till rum 3
+            if (levels[lvlNum][y, x] == 6) //portal/dörr till Rum 3
             {
                 portalBlock3 = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(portalBlock3, Color.Maroon);
                 //Portal3.Add(portalBlock);
             }
-            if (levels[lvlNum][y, x] == 7) // portal/dörr från rum 3 till 1
+            if (levels[lvlNum][y, x] == 7) // portal/dörr från Rum 3 till 1
             {
                 portalBlock4 = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(portalBlock4, Color.Maroon);
                 //Portal4.Add(portalBlock);
             }
-            if (levels[lvlNum][y, x] == 8) //portal/dörr till rum 4
+            if (levels[lvlNum][y, x] == 8) //portal/dörr till Rum 4
             {
                 portalBlock5 = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(portalBlock5, Color.Maroon);
                 //Portal5.Add(portalBlock);
             }
-            if (levels[lvlNum][y, x] == 9) // portal/dörr från rum 4 till 1
+            if (levels[lvlNum][y, x] == 9) // portal/dörr från Rum 4 till 1
             {
                 portalBlock6 = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(portalBlock6, Color.Maroon);
                 //Portal6.Add(portalBlock);
             }
-            if (levels[lvlNum][y, x] == 10) // switch i rum 3
+            if (levels[lvlNum][y, x] == 10) // switch i Rum 3
             {
                 Rectangle switchBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(switchBlock, Color.Purple);
                 Switch.Add(switchBlock);
             }
-            if (levels[lvlNum][y, x] == 11) // hinder i rum 3
+            if (levels[lvlNum][y, x] == 11) // hinder i Rum 3
             {
                 Rectangle gateBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(gateBlock, Color.DarkBlue);
                 gate.Add(gateBlock);
             }
-            if (levels[lvlNum][y, x] == 12) // switch i rum 4
+            if (levels[lvlNum][y, x] == 12) // switch i Rum 4
             {
                 Rectangle switchBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(switchBlock, Color.DarkPurple);
                 Switch2.Add(switchBlock);
             }
-            if (levels[lvlNum][y, x] == 13) // hinder i rum 4
+            if (levels[lvlNum][y, x] == 13) // hinder i Rum 4
             {
                 Rectangle gateBlock = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(gateBlock, Color.DarkBlue);
@@ -289,7 +285,7 @@ while (!Raylib.WindowShouldClose())
                 Raylib.DrawRectangleRec(victoryTP, Color.DarkBlue);
                 //victoryPortal.Add(victoryTP);
             }
-            if (levels[lvlNum][y, x] == 15) //blocket som blokerar portalen till sissta rummet/Victoryskärmen
+            if (levels[lvlNum][y, x] == 15) //blocket som blokerar portalen till sissta Rummet/Victoryskärmen
             {
                 victoryGate = new Rectangle(x * blockSize, y * blockSize, 26, 26);
                 Raylib.DrawRectangleRec(victoryGate, Color.Gray);
@@ -301,66 +297,66 @@ while (!Raylib.WindowShouldClose())
     //BYTE MELLAN RUM
     //------------------------------------------------------------------------------------------------------------------------------------------------
 
-    if (Raylib.CheckCollisionRecs(Player, portalBlock1))
+    if (Raylib.CheckCollisionRecs(player, portalBlock1))
     {//gå till grid 2 och justera position
         lvlNum++;
-        Player.Y += 28;
+        player.Y += 28;
 
     }
 
 
     //PORTAL I RUM 2 TILL RUM 1
-    if (Raylib.CheckCollisionRecs(Player, portalBlock2))
+    if (Raylib.CheckCollisionRecs(player, portalBlock2))
     {
         lvlNum--; // gå tillbaka till grid1 och justera position
-        Player.Y += 28;
+        player.Y += 28;
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------------------------------------
 
     //PORTAL I RUM 1 TILL RUM 3
-    if (Raylib.CheckCollisionRecs(Player, portalBlock3))
+    if (Raylib.CheckCollisionRecs(player, portalBlock3))
     {
         lvlNum += 2; // gå tillbaka till grid1 och justera position
-        Player.X -= 28;
+        player.X -= 28;
     }
 
     //PORTAL I RUM 1 TILL RUM 3
-    if (Raylib.CheckCollisionRecs(Player, portalBlock4))
+    if (Raylib.CheckCollisionRecs(player, portalBlock4))
     {
         lvlNum -= 2; // gå tillbaka till grid1 och justera position
-        Player.X -= 28;
+        player.X -= 28;
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------------------------------------
 
     //PORTAL I RUM 1 TILL RUM 3
-    if (Raylib.CheckCollisionRecs(Player, portalBlock5))
+    if (Raylib.CheckCollisionRecs(player, portalBlock5))
     {
         lvlNum += 3; // gå tillbaka till grid1 och justera position
-        Player.X -= 34;
-        Player.Y += 22;
+        player.X -= 34;
+        player.Y += 22;
     }
 
 
     //PORTAL I RUM 1 TILL RUM 3
-    if (Raylib.CheckCollisionRecs(Player, portalBlock6))
+    if (Raylib.CheckCollisionRecs(player, portalBlock6))
     {
         lvlNum -= 3; // gå tillbaka till grid1 och justera position
-        Player.X += 26;
-        Player.Y -= 34;
+        player.X += 26;
+        player.Y -= 34;
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
 
 
     //PORTAL I RUM 1 TILL RUM 3
-    if (Raylib.CheckCollisionRecs(Player, victoryTP))
+    if (Raylib.CheckCollisionRecs(player, victoryTP))
     {
         lvlNum += 4;
-        Player.Y = 550;
+        player.Y = 550;
     }
 
 
@@ -371,50 +367,41 @@ while (!Raylib.WindowShouldClose())
 
 
 
-    Raylib.DrawRectangleRec(Player, Color.DarkPurple);
+    Raylib.DrawRectangleRec(player, Color.DarkPurple);
     if (scene == "start")
     {
-      startScreen();
+      Metoder.StartScreen();
 
         if (Raylib.IsKeyDown(KeyboardKey.Space))
         {
             scene = "lvl1";
+            timerCountDown.X -= countDownSpeed;
         }
     }
     if (scene == "lvl1")
     { //starta timern
         Raylib.ClearBackground(Color.White);
-        timerCountDown.X -= countDownSpeed;
-    }
-
-    if (scene == "lvl1")
-    {
+        
+    
+    player = Metoder.MovePlayer(player, playerSpeed);
         //spelar kontroller
-        if (Raylib.IsKeyDown(KeyboardKey.D)) Player.X += playerSpeed;
-
-        if (Raylib.IsKeyDown(KeyboardKey.A)) Player.X -= playerSpeed;
-
-        if (Raylib.IsKeyDown(KeyboardKey.W)) Player.Y -= playerSpeed;
-
-        if (Raylib.IsKeyDown(KeyboardKey.S)) Player.Y += playerSpeed;
-
     }
 
     foreach (Rectangle block in rects)
     {//om spelaren går in i en vägg så vänds spelarens hastighet för att stoppa dem
-        if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(Player, block))
-        { Player.X -= playerSpeed; }
-        if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.CheckCollisionRecs(Player, block))
-        { Player.X += playerSpeed; }
-        if (Raylib.IsKeyDown(KeyboardKey.W) && Raylib.CheckCollisionRecs(Player, block))
-        { Player.Y += playerSpeed; }
-        if (Raylib.IsKeyDown(KeyboardKey.S) && Raylib.CheckCollisionRecs(Player, block))
-        { Player.Y -= playerSpeed; }
+        if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(player, block))
+        { player.X -= playerSpeed; }
+        if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.CheckCollisionRecs(player, block))
+        { player.X += playerSpeed; }
+        if (Raylib.IsKeyDown(KeyboardKey.W) && Raylib.CheckCollisionRecs(player, block))
+        { player.Y += playerSpeed; }
+        if (Raylib.IsKeyDown(KeyboardKey.S) && Raylib.CheckCollisionRecs(player, block))
+        { player.Y -= playerSpeed; }
     }
 
     foreach (Rectangle keyBlock in rectsKey)
     {
-        if (Raylib.CheckCollisionRecs(Player, keyBlock))
+        if (Raylib.CheckCollisionRecs(player, keyBlock))
         {//ta bort blocket och lägg till en key
 
             levels[lvlNum][(int)(keyBlock.Y / blockSize), (int)(keyBlock.X / blockSize)] = 0; //delar y,x kordinater med storleken på blocken och sätter dem till 0 aka tar bort det.
@@ -426,7 +413,7 @@ while (!Raylib.WindowShouldClose())
 
     foreach (Rectangle timeBlock in rectsTime)
     {
-        if (Raylib.CheckCollisionRecs(Player, timeBlock))
+        if (Raylib.CheckCollisionRecs(player, timeBlock))
         {
             levels[lvlNum][(int)(timeBlock.Y / blockSize), (int)(timeBlock.X / blockSize)] = 0; // När man nuddar timeBlock så försvinner blocket och man får +5 sekunder på timern.
             timerCountDown.X += 5.655f; // lägg till 5 sek
@@ -448,31 +435,31 @@ while (!Raylib.WindowShouldClose())
     }
     else if (key == 20)
     {
-        // vid 20 keys så låser spelaren upp gaten till sissta rummet/victoryskärmen
+        // vid 20 keys så låser spelaren upp gaten till sissta Rummet/victoryskärmen
         levels[lvlNum][(int)(victoryGate.Y / blockSize), (int)(victoryGate.X / blockSize)] = 0;
         playerSpeed = 7 / 2;
     }
 
 
-    foreach (Rectangle switchBlock in Switch)///switch & gate interaktion i rum 3
+    foreach (Rectangle switchBlock in Switch)///switch & gate interaktion i Rum 3
     {
         foreach (Rectangle gateBlock in gate)
         {
-            if (Raylib.CheckCollisionRecs(Player, switchBlock))
+            if (Raylib.CheckCollisionRecs(player, switchBlock))
 
             {//om spelaren aktiverar switch blocket så försvinner switchen och gatesen
                 levels[lvlNum][(int)(gateBlock.Y / blockSize), (int)(gateBlock.X / blockSize)] = 0;
                 levels[lvlNum][(int)(switchBlock.Y / blockSize), (int)(switchBlock.X / blockSize)] = 0;
             }
             //spelaren kan inte gå igenom gateblocken
-            if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(Player, gateBlock))
-            { Player.X -= playerSpeed; }
-            if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.CheckCollisionRecs(Player, gateBlock))
-            { Player.X += playerSpeed; }
-            if (Raylib.IsKeyDown(KeyboardKey.W) && Raylib.CheckCollisionRecs(Player, gateBlock))
-            { Player.Y += playerSpeed; }
-            if (Raylib.IsKeyDown(KeyboardKey.S) && Raylib.CheckCollisionRecs(Player, gateBlock))
-            { Player.Y -= playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(player, gateBlock))
+            { player.X -= playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.CheckCollisionRecs(player, gateBlock))
+            { player.X += playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.W) && Raylib.CheckCollisionRecs(player, gateBlock))
+            { player.Y += playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.S) && Raylib.CheckCollisionRecs(player, gateBlock))
+            { player.Y -= playerSpeed; }
         }
     }
 
@@ -480,25 +467,25 @@ while (!Raylib.WindowShouldClose())
 
 
 
-    foreach (Rectangle switchBlock in Switch2)//switch & gate interaktion i rum 4
+    foreach (Rectangle switchBlock in Switch2)//switch & gate interaktion i Rum 4
     {
         foreach (Rectangle gateBlock in gate2)
         {
-            if (Raylib.CheckCollisionRecs(Player, switchBlock))
+            if (Raylib.CheckCollisionRecs(player, switchBlock))
 
             {//om spelaren aktiverar switch blocket så försvinner switchen och gatesen
                 levels[lvlNum][(int)(gateBlock.Y / blockSize), (int)(gateBlock.X / blockSize)] = 0;
                 levels[lvlNum][(int)(switchBlock.Y / blockSize), (int)(switchBlock.X / blockSize)] = 0;
             }
             //spelaren kan inte gå igenom gateblocken
-            if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(Player, gateBlock))
-            { Player.X -= playerSpeed; }
-            if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.CheckCollisionRecs(Player, gateBlock))
-            { Player.X += playerSpeed; }
-            if (Raylib.IsKeyDown(KeyboardKey.W) && Raylib.CheckCollisionRecs(Player, gateBlock))
-            { Player.Y += playerSpeed; }
-            if (Raylib.IsKeyDown(KeyboardKey.S) && Raylib.CheckCollisionRecs(Player, gateBlock))
-            { Player.Y -= playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.D) && Raylib.CheckCollisionRecs(player, gateBlock))
+            { player.X -= playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.CheckCollisionRecs(player, gateBlock))
+            { player.X += playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.W) && Raylib.CheckCollisionRecs(player, gateBlock))
+            { player.Y += playerSpeed; }
+            if (Raylib.IsKeyDown(KeyboardKey.S) && Raylib.CheckCollisionRecs(player, gateBlock))
+            { player.Y -= playerSpeed; }
         }
     }
 
